@@ -1,0 +1,25 @@
+{
+    "variables": {
+        "aws_access_key": "",
+        "aws_secret_key": ""
+    },
+
+    "builders": [{
+        "type": "amazon-ebs",
+        "access_key": "{{user `aws_access_key`}}",
+        "secret_key": "{{user `aws_secret_key` }}",
+        "region": "us-east-1",
+        "source_ami": "ami-23d9a94a",
+        "instance_type": "m1.small",
+        "ssh_username": "ubuntu",
+        "ami_name": "packer-docker {{timestamp}}"
+    }],
+
+    "provisioners": [{
+        "type": "shell",
+        "scripts": [
+            "scripts/kernel.sh",
+            "scripts/docker.sh"
+        ]
+    }]
+}
