@@ -1,7 +1,7 @@
 # Packer Template for Docker Images
 
 This repository contains a Packer template for building machine images
-that are Docker-ready on top of Ubuntu 12.04. This involes upgrading the
+that are Docker-ready on top of Ubuntu 12.04. This involves upgrading the
 kernel and installing Docker.
 
 Currently this is only setup for Amazon, but it should be trivial to add
