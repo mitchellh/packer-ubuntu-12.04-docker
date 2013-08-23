@@ -17,7 +17,6 @@
         },
         {
             "type": "vmware",
-            "guest_os_type": "Ubuntu_64",
             "iso_url": "/Users/mitchellh/Downloads/ubuntu-12.04.2-server-amd64.iso",
             "iso_checksum": "af5f788aee1b32c4b2634734309cc9e9",
             "iso_checksum_type": "md5",
@@ -32,6 +31,7 @@
                 "initrd=/install/initrd.gz -- <enter>"
             ],
             "http_directory": "http",
+            "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
             "ssh_wait_timeout": "20m",
             "ssh_username": "vagrant",
             "ssh_password": "vagrant"
@@ -46,11 +46,11 @@
         ],
         "override": {
             "virtualbox": {
-                "execute_command": "echo 'vagrant'| {{.Vars}} sudo -E -S sh '{{.Path}}'"
+                "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
             },
 
             "vmware": {
-                "execute_command": "echo 'vagrant'| {{.Vars}} sudo -E -S sh '{{.Path}}'"
+                "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
             }
         }
     }]
