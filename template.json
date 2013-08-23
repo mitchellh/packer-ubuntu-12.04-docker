@@ -38,23 +38,38 @@
         }
     ],
 
-    "provisioners": [{
-        "type": "shell",
-        "scripts": [
-            "scripts/kernel.sh",
-            "scripts/docker.sh",
-            "scripts/vm_cleanup.sh"
-        ],
-        "override": {
-            "virtualbox": {
-                "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-            },
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/vagrant.sh",
+            "override": {
+                "virtualbox": {
+                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+                },
 
-            "vmware": {
-                "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+                "vmware": {
+                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+                }
+            }
+        },
+        {
+            "type": "shell",
+            "scripts": [
+                "scripts/kernel.sh",
+                "scripts/docker.sh",
+                "scripts/vm_cleanup.sh"
+            ],
+            "override": {
+                "virtualbox": {
+                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+                },
+
+                "vmware": {
+                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+                }
             }
         }
-    }],
+    ],
 
     "post-processors": [
         {
