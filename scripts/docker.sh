@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Add the PPA sources to your apt sources list.
-apt-get install -y python-software-properties
-add-apt-repository -y ppa:dotcloud/lxc-docker
+# Add the Docker repository to your apt sources list.
+echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list
 
 # Update your sources
 apt-get update
