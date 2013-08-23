@@ -42,7 +42,8 @@
         "type": "shell",
         "scripts": [
             "scripts/kernel.sh",
-            "scripts/docker.sh"
+            "scripts/docker.sh",
+            "scripts/vm_cleanup.sh"
         ],
         "override": {
             "virtualbox": {
