@@ -7,4 +7,4 @@ echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/dock
 apt-get update
 
 # Install, you will see another warning that the package cannot be authenticated. Confirm install.
-apt-get install -y lxc-docker
+apt-get install -y --force-yes lxc-docker
