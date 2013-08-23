@@ -17,9 +17,9 @@
         },
         {
             "type": "vmware",
-            "iso_url": "/Users/mitchellh/Downloads/ubuntu-12.04.2-server-amd64.iso",
-            "iso_checksum": "af5f788aee1b32c4b2634734309cc9e9",
-            "iso_checksum_type": "md5",
+            "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.2-server-amd64.iso",
+            "iso_checksum": "63b7c9474398295355f01f57a1657405ae85b1c21953c6c996bbb6374f07e3aa",
+            "iso_checksum_type": "sha256",
             "boot_wait": "5s",
             "boot_command": [
                 "<esc><esc><enter><wait>",
