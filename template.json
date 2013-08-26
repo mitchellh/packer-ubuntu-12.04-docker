@@ -92,8 +92,20 @@
         },
         {
             "type": "shell",
+            "script": "scripts/kernel.sh",
+            "override": {
+                "virtualbox": {
+                    "execute_command": "/bin/true"
+                },
+
+                "vmware": {
+                    "execute_command": "/bin/true"
+                }
+            }
+        },
+        {
+            "type": "shell",
             "scripts": [
-                "scripts/kernel.sh",
                 "scripts/docker.sh",
                 "scripts/vm_cleanup.sh"
             ],
