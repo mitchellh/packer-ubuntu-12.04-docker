@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# Update items.
+sudo apt-get update
+sudo apt-get -y upgrade
+
 # install the backported kernel
-apt-get update
-apt-get install -y linux-image-generic-lts-raring linux-headers-generic-lts-raring
+sudo apt-get install -y linux-image-generic-lts-raring linux-headers-generic-lts-raring
 
 # reboot
 echo "Rebooting the machine..."
-reboot
+sudo reboot
 sleep 60

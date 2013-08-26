@@ -4,77 +4,23 @@
         "aws_secret_key": ""
     },
 
-    "builders": [
-        {
+    "builders": [{
             "type": "amazon-ebs",
             "access_key": "{{user `aws_access_key`}}",
             "secret_key": "{{user `aws_secret_key` }}",
-            "region": "us-east-1",
-            "source_ami": "ami-23d9a94a",
+            "region": "us-west-2",
+            "source_ami": "ami-fb68f8cb",
             "instance_type": "m1.small",
             "ssh_username": "ubuntu",
             "ami_name": "packer-docker {{timestamp}}"
-        },
-        {
-            "type": "vmware",
-            "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.2-server-amd64.iso",
-            "iso_checksum": "63b7c9474398295355f01f57a1657405ae85b1c21953c6c996bbb6374f07e3aa",
-            "iso_checksum_type": "sha256",
-            "boot_wait": "5s",
-            "boot_command": [
-                "<esc><esc><enter><wait>",
-                "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-                "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-                "hostname={{ .Name }} ",
-                "fb=false debconf/frontend=noninteractive ",
-                "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-                "initrd=/install/initrd.gz -- <enter>"
-            ],
-            "http_directory": "http",
-            "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
-            "ssh_wait_timeout": "20m",
-            "ssh_username": "vagrant",
-            "ssh_password": "vagrant"
-        }
-    ],
+            }],
 
-    "provisioners": [
-        {
-            "type": "shell",
-            "script": "scripts/vagrant.sh",
-            "override": {
-                "virtualbox": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                },
-
-                "vmware": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                }
-            }
-        },
-        {
+    "provisioners": [{
             "type": "shell",
             "scripts": [
                 "scripts/kernel.sh",
-                "scripts/docker.sh",
-                "scripts/vm_cleanup.sh"
-            ],
-            "override": {
-                "virtualbox": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                },
+                "scripts/docker.sh"
+            ]
+    }]
 
-                "vmware": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                }
-            }
-        }
-    ],
-
-    "post-processors": [
-        {
-            "type": "vagrant",
-            "keep_input_artifact": true
-        }
-    ]
 }
