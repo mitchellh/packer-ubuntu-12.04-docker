@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# add docker group and add vagrant to it
+sudo groupadd docker
+sudo usermod -a -G docker vagrant
+
 # install curl
 apt-get update
 apt-get install -y curl
