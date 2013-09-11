@@ -114,12 +114,30 @@
         {
             "type": "shell",
             "scripts": [
-                "scripts/docker.sh",
-                "scripts/vm_cleanup.sh"
+                "scripts/docker.sh"
             ],
             "override": {
                 "amazon-ebs": {
                     "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+                },
+
+                "virtualbox": {
+                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+                },
+
+                "vmware": {
+                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+                }
+            }
+        },
+        {
+            "type": "shell",
+            "scripts": [
+                "scripts/vm_cleanup.sh"
+            ],
+            "override": {
+                "amazon-ebs": {
+                    "execute_command": "/bin/true"
                 },
 
                 "virtualbox": {
