@@ -6,6 +6,7 @@ perl -p -i -e 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="cgroup_enable=memory 
 
 # add docker group and add vagrant to it
 sudo groupadd docker
+sudo usermod -a -G docker ubuntu
 sudo usermod -a -G docker vagrant
 
 # install curl
