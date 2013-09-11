@@ -98,6 +98,10 @@
             "type": "shell",
             "script": "scripts/kernel.sh",
             "override": {
+                "amazon-ebs": {
+                    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+                },
+
                 "virtualbox": {
                     "execute_command": "/bin/true"
                 },
@@ -114,6 +118,10 @@
                 "scripts/vm_cleanup.sh"
             ],
             "override": {
+                "amazon-ebs": {
+                    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+                },
+
                 "virtualbox": {
                     "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
                 },
