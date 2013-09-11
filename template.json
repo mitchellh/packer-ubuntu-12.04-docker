@@ -66,6 +66,10 @@
             "type": "shell",
             "script": "scripts/vagrant.sh",
             "override": {
+                "amazon-ebs": {
+                    "execute_command": "/bin/true"
+                },
+
                 "virtualbox": {
                     "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
                 },
