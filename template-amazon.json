@@ -1,0 +1,41 @@
+{
+    "variables": {
+        "aws_access_key": "",
+        "aws_secret_key": ""
+    },
+
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "access_key": "{{user `aws_access_key`}}",
+            "secret_key": "{{user `aws_secret_key` }}",
+            "region": "us-east-1",
+            "source_ami": "ami-53b1ff3a",
+            "instance_type": "m1.small",
+            "ssh_username": "ubuntu",
+            "ami_name": "packer-docker {{timestamp}}"
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/kernel.sh",
+            "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+        },
+        {
+            "type": "shell",
+            "scripts": [
+                "scripts/docker.sh"
+            ],
+            "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "keep_input_artifact": true
+        }
+    ]
+}

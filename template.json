@@ -1,20 +1,5 @@
 {
-    "variables": {
-        "aws_access_key": "",
-        "aws_secret_key": ""
-    },
-
     "builders": [
-        {
-            "type": "amazon-ebs",
-            "access_key": "{{user `aws_access_key`}}",
-            "secret_key": "{{user `aws_secret_key` }}",
-            "region": "us-east-1",
-            "source_ami": "ami-53b1ff3a",
-            "instance_type": "m1.small",
-            "ssh_username": "ubuntu",
-            "ami_name": "packer-docker {{timestamp}}"
-        },
         {
             "type": "vmware",
             "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.3-server-amd64.iso",
@@ -65,47 +50,15 @@
         {
             "type": "shell",
             "script": "scripts/vagrant.sh",
-            "override": {
-                "amazon-ebs": {
-                    "execute_command": "/bin/true"
-                },
-
-                "virtualbox": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                },
-
-                "vmware": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                }
-            }
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
         },
         {
             "type": "shell",
             "script": "scripts/virtualbox.sh",
             "override": {
-                "amazon-ebs": {
-                    "execute_command": "/bin/true"
-                },
                 "virtualbox": {
                     "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
                 },
-                "vmware": {
-                    "execute_command": "/bin/true"
-                }
-            }
-        },
-        {
-            "type": "shell",
-            "script": "scripts/kernel.sh",
-            "override": {
-                "amazon-ebs": {
-                    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
-                },
-
-                "virtualbox": {
-                    "execute_command": "/bin/true"
-                },
-
                 "vmware": {
                     "execute_command": "/bin/true"
                 }
@@ -116,38 +69,14 @@
             "scripts": [
                 "scripts/docker.sh"
             ],
-            "override": {
-                "amazon-ebs": {
-                    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
-                },
-
-                "virtualbox": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                },
-
-                "vmware": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                }
-            }
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
         },
         {
             "type": "shell",
             "scripts": [
                 "scripts/vm_cleanup.sh"
             ],
-            "override": {
-                "amazon-ebs": {
-                    "execute_command": "/bin/true"
-                },
-
-                "virtualbox": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                },
-
-                "vmware": {
-                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
-                }
-            }
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
         }
     ],
 
