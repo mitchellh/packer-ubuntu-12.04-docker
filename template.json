@@ -36,6 +36,7 @@
                 "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false ",
                 "initrd=/install/initrd.gz -- <enter>"
             ],
+            "guest_os_type": "Ubuntu_64",
             "http_directory": "http",
             "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
             "ssh_wait_timeout": "20m",
