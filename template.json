@@ -19,7 +19,8 @@
             "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
             "ssh_wait_timeout": "20m",
             "ssh_username": "vagrant",
-            "ssh_password": "vagrant"
+            "ssh_password": "vagrant",
+            "tools_upload_flavor": "linux"
         },
         {
             "type": "virtualbox",
@@ -52,6 +53,18 @@
             "type": "shell",
             "script": "scripts/vagrant.sh",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/fusion.sh",
+            "override": {
+                "virtualbox": {
+                    "execute_command": "/bin/true"
+                },
+                "vmware": {
+                    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+                }
+            }
         },
         {
             "type": "shell",
