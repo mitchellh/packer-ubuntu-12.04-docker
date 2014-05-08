@@ -1,4 +1,7 @@
 {
+    "variables": {
+        "docker_version": ""
+    },
     "builders": [
         {
             "type": "vmware-iso",
@@ -83,7 +86,7 @@
             "scripts": [
                 "scripts/docker.sh"
             ],
-            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash -c '{{.Path}} {{user `docker_version`}}'"
         },
         {
             "type": "shell",

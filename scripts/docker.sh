@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOCKER_VERSION=$1
+
 # enable memory and swap cgroup
 perl -p -i -e 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"/g'  /etc/default/grub
 /usr/sbin/update-grub
@@ -23,4 +25,8 @@ echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/dock
 apt-get update
 
 # Install. Confirm install.
-apt-get install -y lxc-docker
+if [[ -z $DOCKER_VERSION ]]; then
+    apt-get install -y lxc-docker
+else
+    apt-get install -y lxc-docker-$DOCKER_VERSION
+fi

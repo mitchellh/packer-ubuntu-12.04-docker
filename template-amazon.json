@@ -1,7 +1,8 @@
 {
     "variables": {
         "aws_access_key": "",
-        "aws_secret_key": ""
+        "aws_secret_key": "",
+        "docker_version": ""
     },
 
     "builders": [
@@ -28,7 +29,7 @@
             "scripts": [
                 "scripts/docker.sh"
             ],
-            "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash -c '{{.Path}} {{user `docker_version`}}'"
         }
     ],
 
